@@ -21,7 +21,21 @@ services:
             - php
         networks:
             - internal
+    
+    mysql:
+        image: mariadb:latest
+        env_file:
+            - ../database.env # Configure mysql
+        volumes:
+            - mysqldata:/var/lib/mysql
+        ports:
+            - 3306:3306
+        networks:
+            - internal
 
 networks:
     internal:
         driver: bridge
+
+volumes:
+    mysqldata:
